@@ -1,0 +1,65 @@
+<section>
+  <form [formGroup]="ProjectionForm" (submit)="fakeSubmit(ProjectionForm)">
+    <div class="mb-1">
+      <label for="halls" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select an
+        option</label>
+      <select formControlName="hallId" id="halls"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500">
+        <option disabled selected>Choose a hall</option>
+        <option *ngFor="let hall of availableHalls$ | async" [value]="hall.hallId">
+          {{ hall.name }}
+        </option>
+      </select>
+
+      <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+        role="alert"
+        *ngIf="ProjectionForm.get('hallId')?.touched && ProjectionForm.get('hallId')?.errors?.['required']">
+        <i class='bx bxs-error-circle mx-2'></i> The hall is required
+      </div>
+
+
+      <select formControlName="movieId" id="halls"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 mt-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500">
+        <option disabled selected>Choose a movie</option>
+        <option *ngFor="let movie of availableMovies$ | async" [value]="movie.movieId">
+          {{ movie.name }}
+        </option>
+      </select>
+
+      <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+        role="alert"
+        *ngIf="ProjectionForm.get('movieId')?.touched && ProjectionForm.get('movieId')?.errors?.['required']">
+        <i class='bx bxs-error-circle mx-2'></i> The movie is required
+      </div>
+
+      <input #startDateInput (change)="convertDateFromInput($event, 'projectionStart')"
+        (click)="ProjectionForm.get('projectionStart')?.markAsTouched()"
+        class="mt-2 bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+        type="datetime-local" />
+
+      <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+        role="alert"
+        *ngIf="ProjectionForm.get('projectionStart')?.touched && ProjectionForm.get('projectionStart')?.errors?.['required']">
+        <i class='bx bxs-error-circle mx-2'></i> The start date is required
+      </div>
+
+      <input #endDateInput (change)="convertDateFromInput($event, 'projectionEnd')"
+        (click)="ProjectionForm.get('projectionEnd')?.markAsTouched()"
+        class="mt-2 bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+        type="datetime-local" />
+    </div>
+
+    <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert"
+      *ngIf="ProjectionForm.get('projectionEnd')?.touched && ProjectionForm.get('projectionEnd')?.errors?.['required']">
+      <i class='bx bxs-error-circle mx-2'></i> The end date is required
+    </div>
+
+
+    <div>
+      <button customButton appearance="success" class="mt-2 disabled:opacity-50 disabled:hover:bg-green-600"
+        type="submit" [disabled]="!ProjectionForm.valid">
+        {{ projectionInitValue ? "Update Projection" : "Create Projection" }}
+      </button>
+    </div>
+  </form>
+</section>

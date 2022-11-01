@@ -1,0 +1,49 @@
+<section class="flex">
+  <aside class="w-64">
+    <div
+      class="overflow-y-auto py-4 px-3 rounded sticky top-0 h-screen bg-orange-500 "
+    >
+      <a
+        routerLink="halls"
+        class="flex items-center pl-2.5 mb-5 text-center"
+      >
+      <i class='bx bxs-bowl-rice'></i>
+        <span
+          class="self-center text-xl font-semibold whitespace-nowrap "
+          >cinema app</span
+        >
+      </a>
+
+      <ul class="space-y-2">
+
+        <li *ngFor="let route of routes">
+          <a
+            [routerLink]="route.path"
+            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600"
+          >
+            <i aria-hidden="true" [class]="route.data.icon"></i>
+            <span *ngIf="!toggled" class="ml-3">
+              {{ route.data.name }}
+            </span>
+          </a>
+        </li>
+
+        <li aria-label="bottom sidebar section">
+          <a
+          class="flex items-center hover:cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-orange-500 hover:text-white dark:hover:bg-orange-600"
+
+          type="button"
+            (click)="signOut()"
+          >
+            <i class="bx bx-log-out"></i>
+            <span *ngIf="!toggled" class="ml-3"> Sign Out </span>
+        </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="w-full">
+    <router-outlet></router-outlet>
+  </main>
+</section>

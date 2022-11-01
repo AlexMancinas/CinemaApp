@@ -1,0 +1,130 @@
+<section>
+  <form [formGroup]="MovieForms" (submit)="fakeSubmit(MovieForms)">
+    <div class="mb-6">
+      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Movie Name</label>
+      <input formControlName="name" type="text" id="name"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+        placeholder="Movie Title" />
+
+      <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+        role="alert" *ngIf="MovieForms.get('name')?.touched && MovieForms.get('name')?.errors?.['required']">
+        <i class='bx bxs-error-circle mx-2'></i> The movie name is required
+      </div>
+
+    </div>
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+      <div>
+        <label for="ticket_cost" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ticket
+          Cost</label>
+        <input formControlName="ticketCost" type="number" id="ticket_cost"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+          placeholder="Ticket Cost" />
+
+        <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          role="alert"
+          *ngIf="MovieForms.get('ticketCost')?.touched && MovieForms.get('ticketCost')?.errors?.['required']">
+          <i class='bx bxs-error-circle mx-2'></i> The ticket cost is required
+        </div>
+
+
+      </div>
+      <div>
+        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Movie
+          Category</label>
+        <input formControlName="category" type="string" id="category"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+          placeholder="Movie Category" />
+
+        <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          role="alert" *ngIf="MovieForms.get('category')?.touched && MovieForms.get('category')?.errors?.['required']">
+          <i class='bx bxs-error-circle mx-2'></i> The category is required
+        </div>
+
+
+      </div>
+      <div>
+        <label for="duration" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Movie
+          Duration</label>
+        <input formControlName="duration" type="number" id="duration"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+          placeholder="Movie Duration" />
+
+        <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          role="alert" *ngIf="MovieForms.get('duration')?.touched && MovieForms.get('duration')?.errors?.['required']">
+          <i class='bx bxs-error-circle mx-2'></i> The duration is required
+        </div>
+
+      </div>
+      <div>
+        <label for="language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Movie
+          Language</label>
+        <input formControlName="language" type="string" id="language"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+          placeholder="Movie Language" />
+
+        <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          role="alert" *ngIf="MovieForms.get('language')?.touched && MovieForms.get('language')?.errors?.['required']">
+          <i class='bx bxs-error-circle mx-2'></i> The language is required
+        </div>
+
+      </div>
+    </div>
+    <div class="mb-6">
+      <label for="genre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Movie Genre</label>
+      <input formControlName="genre" type="string" id="genre"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+        placeholder="Movie Genre" />
+
+      <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+        role="alert" *ngIf="MovieForms.get('genre')?.touched && MovieForms.get('genre')?.errors?.['required']">
+        <i class='bx bxs-error-circle mx-2'></i> The genre is required
+      </div>
+
+    </div>
+    <div class="grid justify-items-center mb-6">
+      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="movie_cover">Upload
+        file</label>
+      <img [src]="coverPicture.value" *ngIf="coverPicture.value" width="200px" height="auto" alt="cover picture"
+        class="rounded-lg mb-3 shadow-md" />
+      <input (change)="uploadFile($event)" accept="image/png, image/jpeg"
+        class="text-sm text-grey-500 file:mr-5 file:py-2 file:px-6 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-orange-500 file:text-white hover:file:cursor-pointer hover:file:bg-orange-700 hover:file:text-gray-50"
+        id="movie_cover" type="file" name="movie_cover" />
+    </div>
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+      <div>
+        <label for="start_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Projections
+          Start Date</label>
+        <input (change)="converDateFromInput($event, 'startDate')"
+          (click)="MovieForms.get('startDate')?.markAsTouched()" type="datetime-local" id="start_date" #startDateInput
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+
+        <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          role="alert"
+          *ngIf="MovieForms.get('startDate')?.touched && MovieForms.get('startDate')?.errors?.['required']">
+          <i class='bx bxs-error-circle mx-2'></i> The start date is required
+        </div>
+
+      </div>
+      <div>
+        <label for="end_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Projections End
+          Date</label>
+        <input (change)="converDateFromInput($event, 'endDate')" (click)="MovieForms.get('endDate')?.markAsTouched()"
+          type="datetime-local" id="end_date" #endDateInput
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+
+        <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+          role="alert" *ngIf="MovieForms.get('endDate')?.touched && MovieForms.get('endDate')?.errors?.['required']">
+          <i class='bx bxs-error-circle mx-2'></i> The end date is required
+        </div>
+
+
+      </div>
+    </div>
+    <div>
+      <button customButton appearance="success" class="disabled:opacity-50 disabled:hover:bg-green-600" type="submit"
+        [disabled]="!MovieForms.valid">
+        {{ movieInitValue ? "Update Movie" : "Create Movie" }}
+      </button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,14 @@
+<ng-container *ngIf="cinemaHall$ | loadingObservable | async as cinemaHall">
+  <ng-template [ngIf]="cinemaHall.value">
+    <section class="text-2xl font-semibold text-center mb-5">
+      Edit Cinema Hall
+    </section>
+    <app-cinema-hall-form
+      (cinemaHallCurrentValue)="updateHall($event)"
+      [cinemaHallInitValue]="cinemaHall.value"
+    ></app-cinema-hall-form>
+  </ng-template>
+  <ng-template [ngIf]="cinemaHall.loading">
+   Loading...
+  </ng-template>
+</ng-container>

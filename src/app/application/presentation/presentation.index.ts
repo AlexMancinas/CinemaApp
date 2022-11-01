@@ -1,0 +1,17 @@
+export { DashboardRootComponent } from '../../presentation/pages/dashboard-root/dashboard-root.component';
+export { HallRootComponent } from '../../presentation/pages/dashboard-root/pages/hall-root/hall-root.component';
+export { CinemaHallCreateComponent } from '../../presentation/pages/dashboard-root/pages/hall-root/pages/cinema-hall-create/cinema-hall-create.component';
+export { CinemaHallHomeComponent } from '../../presentation/pages/dashboard-root/pages/hall-root/pages/cinema-hall-home/cinema-hall-home.component';
+export { CinemaHallUpdateComponent } from '../../presentation/pages/dashboard-root/pages/hall-root/pages/cinema-hall-update/cinema-hall-update.component';
+export { MoviesRootComponent } from '../../presentation/pages/dashboard-root/pages/movies-root/movies-root.component';
+export { MoviesCreateComponent } from '../../presentation/pages/dashboard-root/pages/movies-root/pages/movies-create/movies-create.component';
+export { MoviesDetailsComponent } from '../../presentation/pages/dashboard-root/pages/movies-root/pages/movies-details/movies-details.component';
+export { MoviesHomeComponent } from '../../presentation/pages/dashboard-root/pages/movies-root/pages/movies-home/movies-home.component';
+export { MoviesUpdateComponent } from '../../presentation/pages/dashboard-root/pages/movies-root/pages/movies-update/movies-update.component';
+export { ProjectionsCreateComponent } from '../../presentation/pages/dashboard-root/pages/projections-root/pages/projections-create/projections-create.component';
+export { ProjectionsDetailsComponent } from '../../presentation/pages/dashboard-root/pages/projections-root/pages/projections-details/projections-details.component';
+export { ProjectionsHomeComponent } from '../../presentation/pages/dashboard-root/pages/projections-root/pages/projections-home/projections-home.component';
+export { ProjectionsUpdateComponent } from '../../presentation/pages/dashboard-root/pages/projections-root/pages/projections-update/projections-update.component';
+export { ProjectionsRootComponent } from '../../presentation/pages/dashboard-root/pages/projections-root/projections-root.component';
+export { SignInComponent } from '../../presentation/pages/sign-in/sign-in.component';
+export { TicketGeneratorRootComponent } from '../../presentation/pages/dashboard-root/pages/ticket-generator-root/ticket-generator-root.component';

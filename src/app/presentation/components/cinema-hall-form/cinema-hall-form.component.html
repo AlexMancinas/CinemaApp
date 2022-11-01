@@ -1,0 +1,90 @@
+<section class="text-white pb-2">
+  <form [formGroup]="cinemaHallForm" (submit)="fakeSubmit(cinemaHallForm)" >
+    <button customButton appearance="default" class="mr-2 mb-2" type="button" (click)="addRow()">
+      <span class="mr-3">Add Row</span> <i class="bx bxs-plus-circle"></i>
+    </button>
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+      <div>
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cinema Hall
+          Name</label>
+        <input type="string" id="name"
+          class="border bortext-sm rounded-lg focus block w-full p-2.5 text-black placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+          [ngClass]="{'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': cinemaHallForm.get('name')?.touched && cinemaHallForm.get('name')?.errors?.['required']}"
+          placeholder="Cinema Hall Name" formControlName="name" />
+          <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+            role="alert"
+            *ngIf="!(cinemaHallForm.get('name')!.valid) && (cinemaHallForm.get('name')!.touched) ">
+            <i class='bx bxs-error-circle mx-2'></i> The hall name is required
+          </div>
+
+      </div>
+    </div>
+    <section formGroupName="seatSet" class="mt-2">
+
+
+
+      <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+        role="alert"
+        *ngIf="cinemaHallForm.get('seatSet')?.errors?.['required'] && cinemaHallForm.get('seatSet')?.touched ">
+        <i class='bx bxs-error-circle mx-2'></i> Rows are required
+      </div>
+
+
+      <div *ngFor="let row of seatRows.controls; let i = index" [formGroupName]="i">
+        <div>
+          <label for="row_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Row Name</label>
+          <input type="string" id="row_name"
+            class="border bortext-sm rounded-lg focus block w-full p-2.5 mb-2 text-black placeholder-gray-400  focus:ring-orange-500 focus:border-orange-500"
+            [ngClass]="{
+              'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500':
+                seatRows.controls[i].get('name')?.errors &&
+                seatRows.controls[i].get('name')?.touched
+            }" placeholder="Row Name" formControlName="name" />
+
+
+
+          <!-- <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+            role="alert" *ngIf="seatRows.controls[i].get('name')?.errors && seatRows.controls[i].get('name')?.touched">
+            <i class='bx bxs-error-circle mx-2'></i> The rows name are required
+          </div> -->
+
+          <!-- <div class="p-4 mt-2 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+            role="alert" *ngIf="getSeats(i).errors?.['required']">
+            <i class='bx bxs-error-circle mx-2'></i> The rows needs at least one seat
+          </div> -->
+
+
+        </div>
+        <section formArrayName="seats">
+          <div>
+            <button customButton appearance="default" class="mr-2 mb-2" type="button" (click)="addSeats(i)">
+              <span class="mr-3">Add Seat</span><i class="bx bxs-plus-circle"></i>
+            </button>
+            <button customButton appearance="delete" class="ml-2 mb-2" type="button"
+              (click)="removeSeat(i, getSeats(i).length - 1)">
+              <span class="mr-3">Remove Seat</span><i class="bx bxs-minus-circle"></i>
+            </button>
+          </div>
+          <section class="flex py-2 px-1">
+            <div *ngFor="let seat of getSeats(i).controls; let k = index" [formGroupName]="k">
+
+              <div class="bg-orange-600 text-lg px-2 py-2 mx-0.5 rounded-sm text-white">
+                {{row.value.name}} - {{seat.value.number}}
+               </div>
+            </div>
+          </section>
+          <button customButton appearance="delete" class="mb-2" type="button" (click)="deleteRow(i)">
+            <span class="mr-3">Delete Row</span>
+            <i class="bx bxs-minus-circle"></i>
+          </button>
+        </section>
+      </div>
+    </section>
+    <div>
+      <button customButton appearance="success" type="submit" [disabled]="!cinemaHallForm.valid"
+        class="disabled:opacity-50 disabled:cursor-default disabled:bg-green-600">
+        {{ cinemaHallInitValue ? "Update Hall" : "Create Hall" }}
+      </button>
+    </div>
+  </form>
+</section>

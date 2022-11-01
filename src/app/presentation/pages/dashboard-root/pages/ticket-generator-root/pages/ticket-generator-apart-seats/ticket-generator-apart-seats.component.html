@@ -1,0 +1,106 @@
+<section *ngIf="projection$ | loadingObservable | async as projection">
+    <ng-template [ngIf]="projection.value">
+        <h1 class="text-2xl capitalize my-3 mx-1">
+            {{ projection.value.movie?.name }} - {{ projection.value.cinemaHall?.name }} - {{
+            projection.value.projectionStart.seconds * 1000 | date:'medium' }}
+        </h1>
+        <div *ngIf="selectedSeats$ | async as selectedSeats"
+            class="p-4 w-full bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 md:p-8  ">
+            <ng-container
+                *ngIf="userForm.valid | validateTicketBuy:selectedSeats.length:userForm.touched as validationContext">
+                <form class="space-y-6" [formGroup]="userForm" (submit)="apartSeats(userForm.value, selectedSeats)">
+                    <section formGroupName="clientData">
+                        <h5 class="text-xl font-medium text-gray-900 dark:text-white">
+                            Enter data from the client
+                        </h5>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                for="name">Your
+                                name</label>
+                            <input type="name" id="name"
+                                class="border text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 "
+                                placeholder="User name" formControlName="name" />
+                            <span>
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+
+                                </p>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                for="phoneNumber">Your
+                                Phone number
+                            </label>
+                            <input type="tel" id="phoneNumber"
+                                class="border text-sm rounded-lg block w-full p-2.5  placeholder-gray-400 "
+                                placeholder="633-132-2432" formControlName="phoneNumber" />
+                            <span>
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+
+                                </p>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                for="email">Your
+                                email</label>
+                            <input type="email" id="email"
+                                class="border text-sm rounded-lg block w-full p-2.5  border-gray-500 placeholder-gray-400 "
+                                [ngClass]="{'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-orange-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': userForm.get('clientData.email')?.touched && userForm.get('clientData.email')?.errors?.['required'] || userForm.get('clientData.email')?.errors?.['email']}"
+                                placeholder="name@company.com" formControlName="email" />
+                            <span>
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    {{ userForm.get('clientData.email')!.errors | emailErrors:
+                                    userForm.get('clientData.email')!.touched }}
+                                </p>
+                            </span>
+                        </div>
+                        <button [disabled]="!validationContext.valid"
+                            class="w-full text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 disabled:opacity-50 disabled:cursor-default disabled:bg-orange-700"
+                            type="submit">
+                            Apart seats
+                        </button>
+                    </section>
+                    <section aria-label="full validation errors">
+                        {{ validationContext.error }}
+                    </section>
+                    <section>
+                        <ul *ngFor="let row of projection.value.seatSet">
+                            <li>
+                                <div class="flex justify-center mb-4 mt-2">
+                                    <h1 class="text-xl capitalize">
+                                        fila {{ row.name }}
+                                    </h1>
+                                </div>
+                                <div class="flex justify-center">
+                                    <div *ngFor="let seat of row.seats">
+                                        <section *ngIf="selectedSeats | matchSelection:row.name:seat.number as hasMatch"
+                                            class="flex mx-2 flex-col">
+                                            <button [ngClass]="{
+                                                    'bg-red-600 hover:bg-red-400 focus:ring-red-300 focus:bg-red-400 active:bg-red-700' : hasMatch.match,
+                                                    'hover:bg-orange-800 focus:ring-orange-300 dark:bg-orange-500 dark:hover:bg-orange-700 dark:focus:ring-orange-800': !hasMatch.match,
+                                                    'disabled:bg-slate-300 pointer-events-none text-black': seat.aparted && !hasMatch.match
+                                                }" [disabled]="seat.aparted && !hasMatch.match"
+                                                class="  focus:ring-2 focus:outline-none  font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center "
+                                                type="button"
+                                                (click)="!hasMatch.match ? addRowAndSeat(row.name,seat.number) : removeSeat(row.name, seat.number)">
+                                                <i [ngClass]="{'bxs-plus-circle': !hasMatch.match, 'bxs-minus-circle ': hasMatch.match, 'bxs-user-pin': seat.aparted && !hasMatch.match}"
+                                                    class='bx'></i>
+                                            </button>
+                                            <div class="flex justify-center">
+                                                <h3 class="text-lg capitalize">
+                                                    {{ row.name }}-{{ seat.number }}
+                                                </h3>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                </form>
+            </ng-container>
+
+        </div>
+    </ng-template>
+</section>

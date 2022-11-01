@@ -1,0 +1,60 @@
+<section class="sign-in-body">
+  <div class="sign-in-container">
+
+    <ng-container *ngIf="isLoggedIn$|loadingObservable |async as isLogged">
+      <ng-container *ngIf="isLogged.value; else signInForm">
+        <div>
+          <h2 class="text-center capitalize text-orange-500">You're already logged in</h2>
+          <img src="assets/images/undraw_Welcome_re_h3d9 (1).png" class="w-full h-48" alt="Logged in image">
+        </div>
+      </ng-container>
+      <ng-template #signInForm>
+        <form [formGroup]="LoginForm" (submit)="logIn(LoginForm.value)">
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-base font-bold mb-2">Email
+            </label>
+            <input formControlName="email" type="email" name="email" placeholder="example@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight ">
+          </div>
+          <div *ngIf="!(LoginForm.get('email')!.valid) && (LoginForm.get('email')!.touched)"
+              class="bg-red-100 rounded-lg py-2 px-6 my-1 mb-2 text-base text-red-700 inline-flex items-center w-full">
+              <i class='bx bxs-error-circle mx-2'></i> Email Required
+          </div>
+          <div class="mb-2">
+            <label for="password" class="block text-gray-700 text-base font-bold mb-2">
+              Password
+            </label>
+            <input formControlName="password" type="password" name="password" placeholder="******" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight">
+
+          </div>
+          <div *ngIf="!(LoginForm.get('password')!.valid) && (LoginForm.get('password')!.touched)"
+          class="bg-red-100 rounded-lg py-2 px-6 my-1 mb-2 text-base text-red-700 inline-flex items-center w-full">
+          <i class='bx bxs-lock-alt' ></i> Password Required
+      </div>
+          <div class="flex items-center justify-between flex-col">
+            <button
+                [disabled]="!LoginForm.valid || (isLoggedIn$|async)"
+                type="submit"
+                [ngClass]="{
+
+                  'hover:bg-orange-700 hover:cursor-pointer' : LoginForm.valid,
+                  'bg-orange-200 cursor-not-allowed': LoginForm.invalid
+
+                }"
+                class="bg-orange-500 text-white font-bold py-2 px-4 rounded focus:cursor-pointer focus:bg-orange-600">
+              Log in
+            </button>
+            <a href="#" class="inline-block align-baseline font-bold text-sm text-orange-500 hover:text-orange-800 py-4">
+              Forgot Password?
+            </a>
+          </div>
+
+      </form>
+
+      </ng-template>
+
+
+    </ng-container>
+
+
+  </div>
+</section>

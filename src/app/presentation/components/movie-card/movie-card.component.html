@@ -1,0 +1,41 @@
+<article class="rounded-xl border shadow-lg ">
+  <div class="">
+    <img
+      class="w-full responsive-img rounded-t-xl flex-1 overflow-hidden shadow-lg"
+      [src]="movie.coverPicture || defaultCover"
+      alt="Movie Cover"
+    />
+  </div>
+  <div class="px-6 py-4">
+    <h5
+      class="mb-2 text-2xl font-bold tracking-tight text-black  hover:text-gray-400"
+    >
+      {{ movie.name }}
+    </h5>
+  </div>
+  <div class="px-6 pt-4">
+    <span
+      class="inline-block bg-orange-500 rounded-full  text-white  px-3 py-1 text-sm font-semibold mr-2 mb-2"
+    >
+      {{ movie.category }}
+    </span>
+    <span
+      class="inline-block bg-orange-500 rounded-full  text-white  px-3 py-1 text-sm font-semibold mr-2 mb-2"
+    >
+      {{ movie.genre }}
+    </span>
+    <span
+      class="inline-block bg-orange-500 rounded-full  text-white px-3 py-1 text-sm font-semibold mr-2 mb-2"
+    >
+      {{ movie.language }}
+    </span>
+    <span
+      class="inline-block bg-orange-500 rounded-full text-white  px-3 py-1 text-sm font-semibold mr-2 mb-2"
+    >
+      {{ movie.duration }}
+    </span>
+  </div>
+  <div class="px-6 pb-4">
+    <ng-content></ng-content>
+  </div>
+</article>
